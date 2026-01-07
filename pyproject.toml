@@ -4,7 +4,7 @@ python_files = ["test_*.py", "*_test.py"]
 
 [tool.ruff]
 line-length = 88
-exclude = ["migrations"]
+exclude = ["migrations", "settings.py"]
 
 [tool.ruff.lint]
 select = ["E", "W", "F", "I", "B"]
