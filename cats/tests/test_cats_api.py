@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 from django.urls import reverse
 from rest_framework import status
+
 from cats.models import SpyCat
 from cats.tests.factories import SpyCatFactory
 
