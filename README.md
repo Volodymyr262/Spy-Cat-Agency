@@ -45,3 +45,9 @@ To run all tests:
 ```bash
 docker-compose run --rm web pytest
 
+```
+
+## POSTMAN collection
+**https://bold-meadow-956093.postman.co/workspace/workspace1~953431f8-961b-4aa2-ba6e-11655c17fbe5/collection/24779787-e27cbccc-6baa-4ab4-ad10-dc886a6d8fc3?action=share&creator=24779787**
+
+
