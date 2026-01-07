@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - POSTGRES_NAME=spycatdb
+      - POSTGRES_USER=spycatuser
+      - POSTGRES_PASSWORD=supersecret
+      - POSTGRES_HOST=db
+      - DB_ENGINE=django.db.backends.postgresql
+
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=spycatdb
+      - POSTGRES_USER=spycatuser
+      - POSTGRES_PASSWORD=supersecret
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres_data:

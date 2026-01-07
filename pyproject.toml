@@ -1,0 +1,10 @@
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "spy_cat_agency.settings"
+python_files = ["test_*.py", "*_test.py"]
+
+[tool.ruff]
+line-length = 88
+exclude = ["migrations"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B"]

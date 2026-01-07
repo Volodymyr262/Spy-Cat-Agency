@@ -1,0 +1,10 @@
+Django>=5.0,<6.0
+djangorestframework>=3.14
+psycopg2-binary>=2.9
+requests>=2.31
+python-dotenv>=1.0
+
+# Testing & Linting
+pytest>=8.0
+pytest-django>=4.8
+ruff>=0.3
