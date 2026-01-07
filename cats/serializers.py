@@ -32,10 +32,11 @@ class SpyCatUpdateSerializer(serializers.ModelSerializer):
     Serializer strictly for updating SpyCat.
     Only salary is editable.
     """
+
     class Meta:
         model = SpyCat
-        fields = '__all__'
-        read_only_fields = ('name', 'years_of_experience', 'breed')
+        fields = "__all__"
+        read_only_fields = ("name", "years_of_experience", "breed")
 
 
 class TargetSerializer(serializers.ModelSerializer):
@@ -45,14 +46,13 @@ class TargetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Target
-        fields = ['id', 'name', 'country', 'notes', 'is_completed']
-        read_only_fields = ['name', 'country']
+        fields = ["id", "name", "country", "notes", "is_completed"]
 
     def validate(self, data):
         """
         Check if notes are being updated and if it's allowed (Freezing logic).
         """
-        if 'notes' in data:
+        if "notes" in data:
             instance = self.instance
             if instance:
                 if instance.is_completed:
@@ -70,16 +70,16 @@ class MissionSerializer(serializers.ModelSerializer):
     """
     Serializer for Mission model with nested targets.
     """
+
     targets = TargetSerializer(many=True)
     cat = serializers.PrimaryKeyRelatedField(
-        queryset=SpyCat.objects.all(),
-        required=False, allow_null=True
+        queryset=SpyCat.objects.all(), required=False, allow_null=True
     )
 
     class Meta:
         model = Mission
-        fields = ['id', 'cat', 'is_completed', 'targets']
-        read_only_fields = ['is_completed']  # Mission completes automatically
+        fields = ["id", "cat", "is_completed", "targets"]
+        read_only_fields = ["is_completed"]  # Mission completes automatically
 
     def validate_targets(self, value):
         """
@@ -111,10 +111,31 @@ class MissionSerializer(serializers.ModelSerializer):
         """
         Custom create method to handle nested targets.
         """
-        targets_data = validated_data.pop('targets')
+        targets_data = validated_data.pop("targets")
         mission = Mission.objects.create(**validated_data)
 
         for target_data in targets_data:
             Target.objects.create(mission=mission, **target_data)
 
         return mission
+
+
+class AssignCatSerializer(serializers.Serializer):
+    """
+    Serializer specifically for the assign_cat action.
+    """
+
+    cat_id = serializers.IntegerField()
+
+    def validate_cat_id(self, value):
+        try:
+            cat = SpyCat.objects.get(pk=value)
+        except SpyCat.DoesNotExist:
+            raise serializers.ValidationError("Cat not found.") from None
+
+        if Mission.objects.filter(cat=cat).exists():
+            raise serializers.ValidationError(
+                "This cat is already assigned to another mission."
+            )
+
+        return value

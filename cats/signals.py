@@ -2,6 +2,7 @@
 Signals for Cats application.
 Handles automated business logic.
 """
+
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 

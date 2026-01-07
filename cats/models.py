@@ -30,12 +30,9 @@ class Mission(models.Model):
     """
     Represents a Mission assigned to a Spy Cat.
     """
+
     cat = models.OneToOneField(
-        SpyCat,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-        related_name='mission'
+        SpyCat, on_delete=models.SET_NULL, null=True, blank=True, related_name="mission"
     )
     is_completed = models.BooleanField(default=False)
 
@@ -55,10 +52,9 @@ class Target(models.Model):
     """
     Represents a Target within a Mission.
     """
+
     mission = models.ForeignKey(
-        Mission,
-        on_delete=models.CASCADE,
-        related_name='targets'
+        Mission, on_delete=models.CASCADE, related_name="targets"
     )
     name = models.CharField(max_length=100)
     country = models.CharField(max_length=100)

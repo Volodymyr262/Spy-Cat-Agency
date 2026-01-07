@@ -1,6 +1,7 @@
 """
 Tests for Django Signals (Business Logic Side Effects).
 """
+
 from cats.tests.factories import MissionFactory, TargetFactory
 
 

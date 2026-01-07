@@ -1,6 +1,7 @@
 """
 Tests for Mission and Target models using Factory Boy.
 """
+
 import pytest
 from django.core.exceptions import ValidationError
 from django.db.utils import IntegrityError
@@ -27,8 +28,9 @@ def test_prevent_deletion_if_assigned_to_cat():
     """
     mission = MissionFactory()
 
-    with pytest.raises(ValidationError,
-                       match="Cannot delete mission assigned to a cat"):
+    with pytest.raises(
+        ValidationError, match="Cannot delete mission assigned to a cat"
+    ):
         mission.delete()
 
 

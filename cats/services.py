@@ -23,7 +23,7 @@ def check_breed_exists(breed_name: str) -> bool:
         if response.status_code == 200:
             breeds_data = response.json()
             for breed in breeds_data:
-                if breed.get("name") == breed_name:
+                if breed.get("name").lower() == breed_name.lower():
                     return True
         return False
     except requests.RequestException:
