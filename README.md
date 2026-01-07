@@ -8,7 +8,7 @@ Make sure you have **Docker** and **Docker Compose** installed on your machine.
 
 1.  **Clone the repository:**
     ```bash
-    git clone <your-repo-url>
+    git clone https://github.com/Volodymyr262/Spy-Cat-Agency
     cd Spy-Cat-Agency
     ```
 
@@ -18,7 +18,6 @@ Make sure you have **Docker** and **Docker Compose** installed on your machine.
     ```
 
 3.  **Apply Migrations:**
-    (Crucial step to create database tables)
     ```bash
     docker-compose run --rm web python manage.py migrate
     ```
@@ -45,3 +44,4 @@ To run all tests:
 
 ```bash
 docker-compose run --rm web pytest
+
